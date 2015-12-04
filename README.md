@@ -13,9 +13,10 @@ Running the relay is super simple.
         -v /etc/localtime:/etc/localtime \
         -p 9001:9001 \
         --restart=always \
+        -e 'TORRC=/etc/tor/torrc.middle' \
         -e 'NICKNAME=hacktheplanet' \
         --name=torrelay \
-        thezero/tor-relay -f $TORRC
+        thezero/tor-relay
 
 ### Required configuration
 
@@ -32,7 +33,7 @@ There are 3 configuration, Bridge Exit and Middle Node.
 
     -e 'TORRC=/etc/tor/torrc.middle' \
     -e 'TORRC=/etc/tor/torrc.bridge' \
-    -e 'TORRC=/etc/tor/torrc.exit' \ 
+    -e 'TORRC=/etc/tor/torrc.exit' \
 
 ### Recommended additional flags
 
@@ -49,3 +50,16 @@ Since Tor relies on keys on saved keys on disk for establishing trust, it is a g
 You can do this by passing on the following.
 
     -v '/some/local/path:/home/tor/.tor' \
+
+#### Final configuraiton
+
+    $ docker run -d \
+        -v /etc/localtime:/etc/localtime \
+        -v '/var/torrelay:/home/tor/.tor' \
+        -p 9001:9001 \
+        --restart=always \
+        -e 'TORRC=/etc/tor/torrc.middle' \
+        -e 'NICKNAME=thezero' \
+        -e 'CONTACTINFO=TheZero <io@thezero.org>' \
+        --name=torrelay \
+        thezero/tor-relay

@@ -5,6 +5,7 @@ MAINTAINER TheZero <io@thezero.org>
 
 # Note: Tor is only in testing repo -> http://pkgs.alpinelinux.org/packages?package=emacs&repo=all&arch=x86_64
 RUN apk update && apk add \
+	bash \
 	tor \
 	--update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
 	&& rm -rf /var/cache/apk/*
@@ -21,14 +22,14 @@ COPY torrc.exit /etc/tor/torrc.exit
 # make sure files are owned by tor user
 RUN chown -R tor /etc/tor
 
-USER tor
-
-VOLUME /home/tor/.tor
-
 # Add launcher
-ADD config.sh /home/tor/config.sh
+COPY ./config.sh /etc/tor/config.sh
 
 # Start Tor
-RUN /home/tor/config.sh
+RUN chmod +x /etc/tor/config.sh
 
-ENTRYPOINT [ "tor" ]
+RUN mkdir /home/tor
+VOLUME /home/tor/.tor
+#RUN chown -R tor /home/tor
+
+CMD /etc/tor/config.sh

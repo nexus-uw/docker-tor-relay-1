@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "$TORRC" ]; then
-  TORRC=/etc/tor/torrc
+  exit
 fi
 
 # Assumes a key-value'ish pair
@@ -42,3 +42,7 @@ if [ -n "$CONTACTINFO" ]; then
 else
   update_or_add 'ContactInfo' 'Anonymous'
 fi
+
+cp $TORRC /etc/tor/torrc -f
+
+tor -f /etc/tor/torrc
