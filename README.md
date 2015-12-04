@@ -10,12 +10,12 @@ The container is also configured to listen on port 9001 for the relay traffic. M
 Running the relay is super simple.
 
     $ docker run -d \
-        -v /etc/localtime:/etc/localtime \ # so time is synced
+        -v /etc/localtime:/etc/localtime \
         -p 9001:9001 \
         --restart=always \
         -e 'NICKNAME=hacktheplanet' \
         --name=torrelay \
-        thezero/tor-relay -f /etc/tor/torrc.middle
+        thezero/tor-relay -f $TORRC
 
 ### Required configuration
 
@@ -30,10 +30,9 @@ It recommended that you provide a Nickname. You can do this using the following 
 You can set your node type by changing the torrc file.
 There are 3 configuration, Bridge Exit and Middle Node.
 
-    thezero/tor-relay -f /etc/tor/torrc.middle
-    thezero/tor-relay -f /etc/tor/torrc.bridge
-    thezero/tor-relay -f /etc/tor/torrc.exit
-
+    -e 'TORRC=/etc/tor/torrc.middle' \
+    -e 'TORRC=/etc/tor/torrc.bridge' \
+    -e 'TORRC=/etc/tor/torrc.exit' \ 
 
 ### Recommended additional flags
 

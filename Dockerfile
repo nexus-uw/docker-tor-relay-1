@@ -25,4 +25,10 @@ USER tor
 
 VOLUME /home/tor/.tor
 
+# Add launcher
+ADD config.sh /home/tor/config.sh
+
+# Start Tor
+RUN /home/tor/config.sh
+
 ENTRYPOINT [ "tor" ]
