@@ -16,7 +16,7 @@ Running the relay is super simple.
         -e 'TORRC=/etc/tor/torrc.middle' \
         -e 'NICKNAME=hacktheplanet' \
         --name=torrelay \
-        thezero/tor-relay
+        nexusuw/docker-tor-relay
 
 ### Required configuration
 
@@ -62,4 +62,4 @@ You can do this by passing on the following.
         -e 'NICKNAME=thezero' \
         -e 'CONTACTINFO=TheZero <io@thezero.org>' \
         --name=torrelay \
-        thezero/tor-relay
+        nexusuw/docker-tor-relay
