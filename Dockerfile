@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 MAINTAINER simon <s3ramsay@riseup.net>
 
 # Based on https://github.com/jfrazelle/dockerfiles/tree/master/tor-relay
