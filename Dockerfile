@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER TheZero <io@thezero.org>
+MAINTAINER simon <s3ramsay@riseup.net>
 
 # Based on https://github.com/jfrazelle/dockerfiles/tree/master/tor-relay
 
@@ -7,7 +7,6 @@ MAINTAINER TheZero <io@thezero.org>
 RUN apk update && apk add \
 	bash \
 	tor \
-	--update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
 	&& rm -rf /var/cache/apk/*
 
 # default port to used for incoming Tor connections
